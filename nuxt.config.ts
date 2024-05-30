@@ -15,10 +15,11 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         // The private keys which are only available server-side
-        apiSecret: "123",
+        // tmdbApiKey: process.env.TMDB_API_KEY,
         // Keys within public are also exposed client-side
         public: {
-            apiBase: "/api",
+            tmdbApiBaseUrl: process.env.TMDB_API_BASE_URL,
+            tmdbApiKey: process.env.TMDB_API_KEY,
         },
     },
 });
