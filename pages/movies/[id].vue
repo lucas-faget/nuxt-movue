@@ -2,11 +2,13 @@
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import type { Movie } from "~/types/Movie";
-import { fetchMovieById } from "~/services/movies";
+import { BackdropSize } from "~/types/BackdropSize";
+import { PosterSize } from "~/types/PosterSize";
+import { fetchMovieById, getBackdropUrl, getPosterUrl } from "~/services/movies";
 
 const route = useRoute();
 
-const movie = ref<Movie>({});
+const movie = ref<Movie | undefined>(undefined);
 const isPending = ref<boolean>(true);
 
 async function getMovieById() {
@@ -26,11 +28,13 @@ getMovieById();
 <template>
     <section>
         <div v-if="movie && !isPending">
+            <img :src="getPosterUrl(PosterSize.W154, movie.poster_path)" :alt="movie.title" />
             <p>{{ movie.id }}</p>
             <p>{{ movie.title }}</p>
             <p>{{ movie.overview }}</p>
             <p>{{ movie.release_date }}</p>
             <p>{{ movie.vote_average }}</p>
+            <img :src="getBackdropUrl(BackdropSize.W300, movie.backdrop_path)" :alt="movie.title" />
         </div>
     </section>
 </template>
