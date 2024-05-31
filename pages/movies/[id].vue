@@ -4,7 +4,7 @@ import { useRoute } from "vue-router";
 import type { Movie } from "~/types/Movie";
 import { BackdropSize } from "~/types/BackdropSize";
 import { PosterSize } from "~/types/PosterSize";
-import { fetchMovieById, getBackdropUrl, getPosterUrl } from "~/services/movies";
+import { fetchMovieDetails, getBackdropUrl, getPosterUrl } from "~/services/movies";
 
 const route = useRoute();
 
@@ -13,7 +13,7 @@ const isPending = ref<boolean>(true);
 
 async function getMovieById() {
     try {
-        const data = await fetchMovieById(route.params.id);
+        const data = await fetchMovieDetails(route.params.id);
         movie.value = data;
     } catch (error) {
         console.error("Failed to fetch movie: ", error);

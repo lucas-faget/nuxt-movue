@@ -1,4 +1,5 @@
 import type { BackdropSize } from "~/types/BackdropSize";
+import type { Movie } from "~/types/Movie";
 import type { PosterSize } from "~/types/PosterSize";
 
 const config = useRuntimeConfig();
@@ -15,50 +16,65 @@ export const getPosterUrl = (size: PosterSize, path: string): string => {
     return `${imgBaseUrl}/${size}/${path}`;
 };
 
-export async function fetchNowPlayingMovies() {
+export async function fetchNowPlayingMovies(page: number = 1) {
     const { pending, data, error } = await useFetch(`${baseUrl}/movie/now_playing`, {
         params: {
             api_key: apiKey,
+            page: page,
         },
     });
 
     return data.value;
 }
 
-export async function fetchTopRatedMovies() {
+export async function fetchTopRatedMovies(page: number = 1) {
     const { pending, data, error } = await useFetch(`${baseUrl}/movie/top_rated`, {
         params: {
             api_key: apiKey,
+            page: page,
         },
     });
 
     return data.value;
 }
 
-export async function fetchPopularMovies() {
+export async function fetchPopularMovies(page: number = 1) {
     const { pending, data, error } = await useFetch(`${baseUrl}/movie/popular`, {
         params: {
             api_key: apiKey,
+            page: page,
         },
     });
 
     return data.value;
 }
 
-export async function fetchUpcomingMovies() {
+export async function fetchUpcomingMovies(page: number = 1) {
     const { pending, data, error } = await useFetch(`${baseUrl}/movie/upcoming`, {
         params: {
             api_key: apiKey,
+            page: page,
         },
     });
 
     return data.value;
 }
 
-export async function fetchMovieById(id: string) {
+export async function fetchMovieDetails(id: string) {
     const { pending, data, error } = await useFetch(`${baseUrl}/movie/${id}`, {
         params: {
             api_key: apiKey,
+        },
+    });
+
+    return data.value;
+}
+
+export async function fetchSimilarMovies(id: string, page: number = 1) {
+    const { pending, data, error } = await useFetch(`${baseUrl}/movie/${id}/similar`, {
+        params: {
+            api_key: apiKey,
+            page: page,
         },
     });
 

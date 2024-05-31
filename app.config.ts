@@ -1,5 +1,5 @@
 export default defineAppConfig({
-    title: "Hello Nuxt",
+    title: "Movue",
     theme: {
         dark: true,
         colors: {

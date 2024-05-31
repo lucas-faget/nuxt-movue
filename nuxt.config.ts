@@ -1,18 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     css: ["~/assets/css/main.css"],
+    modules: ["@nuxt/ui"],
+
     app: {
         pageTransition: { name: "page", mode: "out-in" },
     },
-    devtools: { enabled: true },
-    $production: {
-        routeRules: {
-            "/**": { isr: true },
-        },
-    },
-    $development: {
-        //
-    },
+
     runtimeConfig: {
         // The private keys which are only available server-side
         // tmdbApiKey: process.env.TMDB_API_KEY,
