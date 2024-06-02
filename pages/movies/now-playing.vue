@@ -1,13 +1,37 @@
 <script setup lang="ts">
-import { MovieListGroup } from "~/types/MovieListGroup";
+import type { Movie } from "~/types/Movie";
+import type { MovieList } from "~/types/MovieList";
+import { fetchNowPlayingMovies } from "~/services/movies";
 
-const group: MovieListGroup = MovieListGroup.NowPlaying;
+const movies = ref<Movie[]>([]);
+const totalPages = ref<number>(0);
+const totalResults = ref<number>(0);
+const isPending = ref<boolean>(true);
+
+async function getMovies(page: number) {
+    try {
+        const data: MovieList = (await fetchNowPlayingMovies(page)) as MovieList;
+        movies.value = data.results;
+        totalPages.value = data.total_pages;
+        totalResults.value = data.total_results;
+    } catch (error) {
+        console.error("Failed to fetch movies: ", error);
+    } finally {
+        isPending.value = false;
+    }
+}
+
+getMovies(1);
 </script>
 
 <template>
     <div class="p-8 flex flex-col gap-8">
-        <span class="text-4xl">Now Playing Movies</span>
-        <hr class="h-px border-0 bg-gray-400 dark:bg-gray-700" />
-        <MovieCatalog :group="group" />
+        <MovieCatalog
+            title="Now Playing Movies"
+            :movies="movies"
+            :total-pages="totalPages"
+            :total-results="totalResults"
+            @change-page="getMovies"
+        />
     </div>
 </template>
