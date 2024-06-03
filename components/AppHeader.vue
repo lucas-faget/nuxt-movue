@@ -37,7 +37,7 @@ async function submitSearch() {
             </li>
         </ul>
         <UInput
-            size="lg"
+            size="md"
             v-model="query"
             name="q"
             placeholder="Search..."

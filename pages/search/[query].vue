@@ -12,6 +12,7 @@ const isEmptyOrWhiteSpaces = (str: string): boolean => {
 const route = useRoute();
 
 const query = ref<string>(route.params.query as string);
+const activePage = ref<number>(1);
 const movies = ref<Movie[]>([]);
 const totalPages = ref<number>(0);
 const totalResults = ref<number>(0);
@@ -36,17 +37,49 @@ async function getMovies(page: number) {
     }
 }
 
-getMovies(1);
+function handlePageChange(page: number) {
+    activePage.value = page;
+    getMovies(activePage.value);
+}
+
+function handleInputChange() {
+    getMovies(activePage.value);
+}
+
+getMovies(activePage.value);
 </script>
 
 <template>
     <section class="p-8 flex flex-col gap-8">
-        <MovieCatalog
-            title="Movie Search Results"
-            :movies="movies"
-            :total-pages="totalPages"
-            :total-results="totalResults"
-            @change-page="getMovies"
-        />
+        <NuxtLayout name="movies" title="Movie Search">
+            <UInput
+                size="md"
+                v-model="query"
+                name="q"
+                placeholder="Search..."
+                icon="i-heroicons-magnifying-glass-20-solid"
+                autocomplete="off"
+                :ui="{ icon: { trailing: { pointer: '' } } }"
+                @keyup.enter="handleInputChange"
+            >
+                <template #trailing>
+                    <UButton
+                        v-show="query !== ''"
+                        color="gray"
+                        variant="link"
+                        icon="i-heroicons-x-mark-20-solid"
+                        :padded="false"
+                        @click="query = ''"
+                    />
+                </template>
+            </UInput>
+            <MovieCatalog
+                :active-page="activePage"
+                :movies="movies"
+                :total-pages="totalPages"
+                :total-results="totalResults"
+                @change-page="handlePageChange"
+            />
+        </NuxtLayout>
     </section>
 </template>

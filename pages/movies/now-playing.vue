@@ -26,12 +26,13 @@ getMovies(1);
 
 <template>
     <section class="p-8 flex flex-col gap-8">
-        <MovieCatalog
-            title="Now Playing Movies"
-            :movies="movies"
-            :total-pages="totalPages"
-            :total-results="totalResults"
-            @change-page="getMovies"
-        />
+        <NuxtLayout name="movies" title="Now Playing Movies">
+            <MovieCatalog
+                :movies="movies"
+                :total-pages="totalPages"
+                :total-results="totalResults"
+                @change-page="getMovies"
+            />
+        </NuxtLayout>
     </section>
 </template>
