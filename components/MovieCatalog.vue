@@ -3,12 +3,20 @@ import type { Movie } from "~/types/Movie";
 
 const page = ref<number>(1);
 
-defineProps<{
+const props = defineProps<{
     title: string;
     movies: Movie[];
     totalPages: number;
     totalResults: number;
 }>();
+
+const isMovieListEmpty = computed(() => {
+    return props.movies.length === 0;
+});
+
+const pageCount = computed(() => {
+    return Math.ceil(props.totalResults / props.totalPages);
+});
 
 const emits = defineEmits(["changePage"]);
 
@@ -26,21 +34,22 @@ watch(page, () => {
                 size="lg"
                 v-model="page"
                 :max="8"
-                :page-count="totalPages"
+                :page-count="pageCount"
                 :total="totalResults"
                 show-last
                 show-first
             />
         </div>
         <div>
-            <MovieList :movies="movies" />
+            <MovieList v-if="!isMovieListEmpty" :movies="movies" />
+            <span v-else>No results found.</span>
         </div>
         <div>
             <UPagination
                 size="lg"
                 v-model="page"
                 :max="8"
-                :page-count="totalPages"
+                :page-count="pageCount"
                 :total="totalResults"
                 show-last
                 show-first

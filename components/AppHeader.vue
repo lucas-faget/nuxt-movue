@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const query = ref<string>("");
+
 const links = [
     {
         label: "Home",
@@ -21,6 +23,10 @@ const links = [
         to: "/movies/upcoming",
     },
 ];
+
+async function submitSearch() {
+    await navigateTo(`/search/${query.value.trim()}`);
+}
 </script>
 
 <template>
@@ -31,11 +37,25 @@ const links = [
             </li>
         </ul>
         <UInput
-            icon="i-heroicons-magnifying-glass-20-solid"
-            size="sm"
-            color="white"
-            :trailing="false"
+            size="lg"
+            v-model="query"
+            name="q"
             placeholder="Search..."
-        />
+            icon="i-heroicons-magnifying-glass-20-solid"
+            autocomplete="off"
+            :ui="{ icon: { trailing: { pointer: '' } } }"
+            @keyup.enter="submitSearch"
+        >
+            <template #trailing>
+                <UButton
+                    v-show="query !== ''"
+                    color="gray"
+                    variant="link"
+                    icon="i-heroicons-x-mark-20-solid"
+                    :padded="false"
+                    @click="query = ''"
+                />
+            </template>
+        </UInput>
     </nav>
 </template>

@@ -8,12 +8,13 @@ import { fetchMovieDetails, getBackdropUrl, getPosterUrl } from "~/services/movi
 
 const route = useRoute();
 
+const id: string = route.params.id as string;
 const movie = ref<Movie | undefined>(undefined);
 const isPending = ref<boolean>(true);
 
 async function getMovieById() {
     try {
-        const data = await fetchMovieDetails(route.params.id);
+        const data: Movie = (await fetchMovieDetails(id)) as Movie;
         movie.value = data;
     } catch (error) {
         console.error("Failed to fetch movie: ", error);
@@ -38,11 +39,3 @@ getMovieById();
         </div>
     </section>
 </template>
-
-<style>
-.movie-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-</style>

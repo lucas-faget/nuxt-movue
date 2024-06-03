@@ -25,7 +25,7 @@ getMovies(1);
 </script>
 
 <template>
-    <div class="p-8 flex flex-col gap-8">
+    <section class="p-8 flex flex-col gap-8">
         <MovieCatalog
             title="Top Rated Movies"
             :movies="movies"
@@ -33,5 +33,5 @@ getMovies(1);
             :total-results="totalResults"
             @change-page="getMovies"
         />
-    </div>
+    </section>
 </template>
