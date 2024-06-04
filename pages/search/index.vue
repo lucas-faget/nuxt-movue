@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import type { Movie } from "~/types/Movie";
 import type { MovieList } from "~/types/MovieList";
@@ -11,17 +11,21 @@ const isEmptyOrWhiteSpaces = (str: string): boolean => {
 
 const route = useRoute();
 
-const query = ref<string>(route.params.query as string);
-const activePage = ref<number>(1);
+const searchQuery = ref<string>((route.query.q as string) ?? "");
+const page = ref<number>(1);
 const movies = ref<Movie[]>([]);
 const totalPages = ref<number>(0);
 const totalResults = ref<number>(0);
 const isPending = ref<boolean>(true);
 
-async function getMovies(page: number) {
+async function getMovies() {
     try {
-        if (!isEmptyOrWhiteSpaces(query.value)) {
-            const data: MovieList = (await searchMovies(query.value.trim(), page)) as MovieList;
+        if (!isEmptyOrWhiteSpaces(searchQuery.value)) {
+            const data: MovieList = (await searchMovies(
+                searchQuery.value.trim(),
+                page
+            )) as MovieList;
+            page.value = data.page;
             movies.value = data.results;
             totalPages.value = data.total_pages;
             totalResults.value = data.total_results;
@@ -37,16 +41,16 @@ async function getMovies(page: number) {
     }
 }
 
-function handlePageChange(page: number) {
-    activePage.value = page;
-    getMovies(activePage.value);
+function handleSearchQueryInput() {
+    page.value = 1;
+    getMovies();
 }
 
-function handleInputChange() {
-    getMovies(activePage.value);
-}
+getMovies();
 
-getMovies(activePage.value);
+watch(page, () => {
+    getMovies();
+});
 </script>
 
 <template>
@@ -54,31 +58,30 @@ getMovies(activePage.value);
         <NuxtLayout name="movies" title="Movie Search">
             <UInput
                 size="md"
-                v-model="query"
+                v-model="searchQuery"
                 name="q"
                 placeholder="Search..."
                 icon="i-heroicons-magnifying-glass-20-solid"
                 autocomplete="off"
                 :ui="{ icon: { trailing: { pointer: '' } } }"
-                @keyup.enter="handleInputChange"
+                @keyup.enter="handleSearchQueryInput"
             >
                 <template #trailing>
                     <UButton
-                        v-show="query !== ''"
+                        v-show="searchQuery !== ''"
                         color="gray"
                         variant="link"
                         icon="i-heroicons-x-mark-20-solid"
                         :padded="false"
-                        @click="query = ''"
+                        @click="searchQuery = ''"
                     />
                 </template>
             </UInput>
             <MovieCatalog
-                :active-page="activePage"
+                v-model="page"
                 :movies="movies"
                 :total-pages="totalPages"
                 :total-results="totalResults"
-                @change-page="handlePageChange"
             />
         </NuxtLayout>
     </section>

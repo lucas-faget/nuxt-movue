@@ -23,7 +23,7 @@ export const getPosterUrl = (size: PosterSize, path: string): string => {
  * @returns
  */
 export async function fetchMovieList(endpoint: string, params: Record<string, any> = {}) {
-    const { pending, data, error } = await useFetch(`${baseUrl}/${endpoint}`, {
+    const { data } = await useFetch(`${baseUrl}/${endpoint}`, {
         params: {
             api_key: apiKey,
             ...params,
@@ -46,7 +46,7 @@ export async function fetchMovieList(endpoint: string, params: Record<string, an
  * @returns
  */
 export async function fetchMovie(endpoint: string, params: Record<string, any> = {}) {
-    const { pending, data, error } = await useFetch(`${baseUrl}/${endpoint}`, {
+    const { data } = await useFetch(`${baseUrl}/${endpoint}`, {
         params: {
             api_key: apiKey,
             ...params,

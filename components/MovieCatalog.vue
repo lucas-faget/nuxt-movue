@@ -1,28 +1,17 @@
 <script setup lang="ts">
 import type { Movie } from "~/types/Movie";
 
+const page = defineModel();
+
 const props = defineProps<{
-    page?: number;
     movies: Movie[];
     totalPages: number;
     totalResults: number;
 }>();
 
-const activePage = ref<number>(props.page ?? 1);
+const isMovieListEmpty = computed(() => props.movies.length === 0);
 
-const isMovieListEmpty = computed(() => {
-    return props.movies.length === 0;
-});
-
-const pageCount = computed(() => {
-    return Math.ceil(props.totalResults / props.totalPages);
-});
-
-const emits = defineEmits(["changePage"]);
-
-watch(activePage, () => {
-    emits("changePage", activePage.value);
-});
+const pageCount = computed(() => Math.ceil(props.totalResults / props.totalPages));
 </script>
 
 <template>
@@ -30,7 +19,7 @@ watch(activePage, () => {
         <div>
             <UPagination
                 size="lg"
-                v-model="activePage"
+                v-model="page"
                 :max="8"
                 :page-count="pageCount"
                 :total="totalResults"
@@ -45,7 +34,7 @@ watch(activePage, () => {
         <div>
             <UPagination
                 size="lg"
-                v-model="activePage"
+                v-model="page"
                 :max="8"
                 :page-count="pageCount"
                 :total="totalResults"

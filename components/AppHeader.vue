@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const query = ref<string>("");
+const searchQuery = ref<string>("");
 
 const links = [
     {
@@ -25,7 +25,12 @@ const links = [
 ];
 
 async function submitSearch() {
-    await navigateTo(`/search/${query.value.trim()}`);
+    const query: string = searchQuery.value.trim();
+    if (query) {
+        await navigateTo({ path: "/search", query: { q: query } });
+    } else {
+        await navigateTo({ path: "/search" });
+    }
 }
 </script>
 
@@ -38,7 +43,7 @@ async function submitSearch() {
         </ul>
         <UInput
             size="md"
-            v-model="query"
+            v-model="searchQuery"
             name="q"
             placeholder="Search..."
             icon="i-heroicons-magnifying-glass-20-solid"
@@ -48,12 +53,12 @@ async function submitSearch() {
         >
             <template #trailing>
                 <UButton
-                    v-show="query !== ''"
+                    v-show="searchQuery !== ''"
                     color="gray"
                     variant="link"
                     icon="i-heroicons-x-mark-20-solid"
                     :padded="false"
-                    @click="query = ''"
+                    @click="searchQuery = ''"
                 />
             </template>
         </UInput>
