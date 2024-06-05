@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <section class="mt-16">
         <h1>Welcome to the homepage</h1>
-    </div>
+    </section>
 </template>

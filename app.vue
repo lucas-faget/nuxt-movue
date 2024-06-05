@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col min-h-screen">
         <NuxtLayout>
-            <div class="min-h-screen pt-16">
+            <div class="min-h-screen">
                 <NuxtPage />
             </div>
         </NuxtLayout>
