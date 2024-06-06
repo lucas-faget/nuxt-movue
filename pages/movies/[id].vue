@@ -37,7 +37,7 @@ getSimilarMovies();
 </script>
 
 <template>
-    <section v-if="movie" class="mt-16 flex flex-col gap-8">
+    <section v-if="movie" class="w-full mt-16 flex flex-col gap-8">
         <div>
             <div class="flex">
                 <div class="basis-2/5 p-16 flex flex-col gap-8">

@@ -1,7 +1,8 @@
 <template>
     <div class="flex flex-col min-h-screen">
         <NuxtLayout>
-            <div class="min-h-screen">
+            <div class="min-h-screen flex">
+                <VerticalNavigation />
                 <NuxtPage />
             </div>
         </NuxtLayout>
