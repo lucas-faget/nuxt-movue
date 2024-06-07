@@ -4,6 +4,14 @@ export default defineNuxtConfig({
     modules: ["@nuxt/ui"],
 
     app: {
+        head: {
+            link: [
+                {
+                    rel: "stylesheet",
+                    href: "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Quicksand:wght@400&display=swap",
+                },
+            ],
+        },
         pageTransition: { name: "page", mode: "out-in" },
     },
 

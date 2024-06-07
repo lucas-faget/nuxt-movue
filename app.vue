@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col min-h-screen">
+    <div class="flex flex-col min-h-screen font-text">
         <NuxtLayout>
             <div class="min-h-screen flex">
                 <VerticalNavigation />

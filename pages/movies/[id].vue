@@ -41,18 +41,20 @@ getSimilarMovies();
         <div>
             <div class="flex">
                 <div class="basis-2/5 p-16 flex flex-col gap-8">
-                    <p class="text-5xl">{{ movie.title }}</p>
+                    <p class="text-5xl font-title">{{ movie.title }}</p>
                     <UDivider />
                     <p>{{ movie.overview }}</p>
                     <UDivider />
                     <p>{{ movie.release_date }}</p>
                     <p>{{ movie.vote_average }}</p>
                 </div>
-                <div class="basis-3/5 image-container">
-                    <img
-                        :src="getBackdropUrl(BackdropSize.W780, movie.backdrop_path)"
-                        :alt="movie.title"
-                    />
+                <div class="basis-3/5">
+                    <div class="image-container">
+                        <img
+                            :src="getBackdropUrl(BackdropSize.W780, movie.backdrop_path)"
+                            :alt="movie.title"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,7 +67,8 @@ getSimilarMovies();
 <style scoped>
 .image-container {
     position: relative;
-    display: inline-block;
+    width: 100%;
+    height: auto;
 }
 
 .image-container::before {
@@ -77,24 +80,23 @@ getSimilarMovies();
     height: 100%;
     background: linear-gradient(
             0deg,
-            rgba(18, 18, 18, 1) 0%,
-            rgba(18, 18, 18, 0) 30%,
-            rgba(18, 18, 18, 0) 70%,
-            rgba(18, 18, 18, 1) 100%
+            var(--background-color) 0%,
+            var(--background-color-transparent) 30%,
+            var(--background-color-transparent) 70%,
+            var(--background-color) 100%
         ),
         linear-gradient(
             90deg,
-            rgba(18, 18, 18, 1) 0%,
-            rgba(18, 18, 18, 0) 30%,
-            rgba(18, 18, 18, 0) 70%,
-            rgba(18, 18, 18, 1) 100%
+            var(--background-color) 0%,
+            var(--background-color-transparent) 30%,
+            var(--background-color-transparent) 70%,
+            var(--background-color) 100%
         );
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
 .image-container img {
-    display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 </style>
