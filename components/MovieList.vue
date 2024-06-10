@@ -19,7 +19,7 @@ const props = defineProps<{
                             class="w-full"
                             :src="getPosterUrl(PosterSize.W154, movie.poster_path)"
                             :alt="movie.title"
-                            onerror="this.onerror = null; this.src='poster-not-found.jpg'"
+                            onerror="this.onerror = null; this.src='/poster-not-found.jpg'"
                         />
                     </div>
                     <p v-if="movie.title">{{ movie.title }}</p>
