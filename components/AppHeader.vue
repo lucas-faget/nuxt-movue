@@ -31,13 +31,15 @@ async function submitSearch() {
 </script>
 
 <template>
-    <nav class="absolute top-0 lef-0 w-full h-16 pl-60 pr-4 flex justify-between items-center">
-        <ul class="flex gap-8">
+    <nav class="absolute top-0 lef-0 w-full h-16 pl-60 pr-4 flex justify-between items-center z-40">
+        <ul class="flex gap-8 max-lg:hidden">
             <li class="hover:text-primary" v-for="link in links">
                 <NuxtLink :to="link.to">{{ link.label }}</NuxtLink>
             </li>
         </ul>
+
         <UInput
+            class="ml-auto max-sm:hidden"
             size="md"
             v-model="searchQuery"
             name="q"

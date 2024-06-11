@@ -61,7 +61,10 @@ const links = computed(() => [
 </script>
 
 <template>
-    <aside :class="['aside', isOpen ? 'w-56' : 'w-16']" class="flex flex-col bg-slate-900">
+    <aside
+        :class="['aside', isOpen ? 'w-52' : 'w-16']"
+        class="relative flex flex-col bg-slate-900 z-50 shrink-0"
+    >
         <div class="h-16 flex items-center px-3">
             <UIcon
                 :name="isOpen ? 'i-heroicons-x-mark' : 'i-heroicons-bars-3'"
