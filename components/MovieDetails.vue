@@ -28,7 +28,10 @@ const props = defineProps<{
 
         <UDivider v-if="movie.release_date || movie.runtime" />
 
-        <div v-if="movie.genres && movie.genres.length > 0" class="flex gap-2 items-center">
+        <div
+            v-if="movie.genres && movie.genres.length > 0"
+            class="flex items-center flex-wrap gap-2"
+        >
             <UBadge v-for="genre in movie.genres" size="lg" color="white" variant="solid">
                 {{ genre.name }}
             </UBadge>

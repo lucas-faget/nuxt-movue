@@ -18,13 +18,22 @@ const pageCount = computed(() => Math.ceil(props.totalResults / props.totalPages
     <section class="flex flex-col gap-8">
         <div>
             <UPagination
+                class="max-md:hidden"
                 size="lg"
                 v-model="page"
-                :max="8"
+                :max="7"
                 :page-count="pageCount"
                 :total="totalResults"
                 show-last
                 show-first
+            />
+            <UPagination
+                class="md:hidden"
+                size="sm"
+                v-model="page"
+                :max="5"
+                :page-count="pageCount"
+                :total="totalResults"
             />
         </div>
         <div>
@@ -33,13 +42,22 @@ const pageCount = computed(() => Math.ceil(props.totalResults / props.totalPages
         </div>
         <div>
             <UPagination
+                class="max-md:hidden"
                 size="lg"
                 v-model="page"
-                :max="8"
+                :max="7"
                 :page-count="pageCount"
                 :total="totalResults"
                 show-last
                 show-first
+            />
+            <UPagination
+                class="md:hidden"
+                size="sm"
+                v-model="page"
+                :max="5"
+                :page-count="pageCount"
+                :total="totalResults"
             />
         </div>
     </section>

@@ -1,17 +1,15 @@
 <script setup lang="ts">
-const isOpen = ref<boolean>(true);
+const props = defineProps<{
+    isOpen: boolean;
+}>();
 
-const labelClass = computed(() => (isOpen.value ? "ml-2" : "hidden"));
+const labelClass = computed(() => (props.isOpen ? "ml-2" : "hidden"));
 const iconClass: string = "h-7 w-7";
-
-const toggleNavigation = () => {
-    isOpen.value = !isOpen.value;
-};
 
 const links = computed(() => [
     [
         {
-            label: isOpen ? "Home" : "",
+            label: "Home",
             labelClass: labelClass.value,
             icon: "i-heroicons-home",
             iconClass: iconClass,
@@ -63,17 +61,22 @@ const links = computed(() => [
 <template>
     <aside
         :class="['aside', isOpen ? 'w-52' : 'w-16']"
-        class="relative flex flex-col bg-slate-900 z-50 shrink-0"
+        class="bg-slate-900 shrink-0 fixed top-0 left-0 z-40 h-full"
     >
-        <div class="h-16 flex items-center px-3">
-            <UIcon
-                :name="isOpen ? 'i-heroicons-x-mark' : 'i-heroicons-bars-3'"
-                class="h-8 w-8 cursor-pointer"
-                @click="toggleNavigation"
-            />
-        </div>
-        <div class="mt-8 flex justify-center">
-            <UVerticalNavigation :links="links" :class="isOpen ? 'w-11/12' : ''" />
+        <div class="flex flex-col">
+            <div
+                :class="isOpen ? 'pl-4' : 'justify-center'"
+                class="h-16 flex items-center hover:bg-primary cursor-pointer"
+                @click="$emit('toggle')"
+            >
+                <UIcon
+                    :name="isOpen ? 'i-heroicons-x-mark' : 'i-heroicons-bars-3'"
+                    class="h-8 w-8"
+                />
+            </div>
+            <div class="mt-8 flex justify-center">
+                <UVerticalNavigation :links="links" :class="isOpen ? 'w-11/12' : ''" />
+            </div>
         </div>
     </aside>
 </template>

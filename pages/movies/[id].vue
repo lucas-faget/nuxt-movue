@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { format } from "date-fns";
 import type { Movie } from "~/types/Movie";
 import type { MovieList } from "~/types/MovieList";
 import { BackdropSize } from "~/types/BackdropSize";
@@ -47,20 +46,33 @@ getSimilarMovies();
                 />
             </div>
 
-            <div class="movie-details relative p-12 z-20" style="width: min(500px, 100%)">
+            <div class="movie-details w-full max-w-[500px] min-h-[75vh] relative p-12 z-20">
                 <MovieDetails :movie="movie" />
             </div>
         </div>
 
         <div v-if="!isSimilarMovieListEmpty" class="p-8 flex flex-col gap-8">
-            <UDivider :label="'Similar Movies'" />
+            <UDivider :label="'Similar Movies'" size="sm" />
             <MovieList :movies="similarMovies" />
-            <UDivider />
+            <UDivider size="sm" />
         </div>
     </section>
 </template>
 
 <style scoped>
+.movie-details {
+    background: linear-gradient(
+        to right,
+        rgba(18, 18, 18, 1) 0%,
+        rgba(18, 18, 18, 0.8) 20%,
+        rgba(18, 18, 18, 0.7) 80%,
+        rgba(18, 18, 18, 0.6) 85%,
+        rgba(18, 18, 18, 0.45) 90%,
+        rgba(18, 18, 18, 0.25) 95%,
+        rgba(18, 18, 18, 0) 100%
+    );
+}
+
 .image-container {
     position: absolute;
     top: 0;

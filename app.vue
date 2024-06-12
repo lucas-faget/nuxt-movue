@@ -1,9 +1,17 @@
+<script setup lang="ts">
+const isNavigationOpen = ref<boolean>(true);
+
+const toggleHandler = () => {
+    isNavigationOpen.value = !isNavigationOpen.value;
+};
+</script>
+
 <template>
     <div class="flex flex-col min-h-screen font-text">
         <NuxtLayout>
-            <div class="min-h-screen flex">
-                <VerticalNavigation />
-                <NuxtPage />
+            <div class="min-h-screen flex relative">
+                <VerticalNavigation :isOpen="isNavigationOpen" @toggle="toggleHandler" />
+                <NuxtPage :class="isNavigationOpen ? 'ml-52' : 'ml-16'" />
             </div>
         </NuxtLayout>
     </div>
