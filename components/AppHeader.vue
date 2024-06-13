@@ -4,18 +4,22 @@ const searchQuery = ref<string>("");
 const links = [
     {
         label: "Now Playing",
+        icon: "i-heroicons-film",
         to: "/movies/now-playing",
     },
     {
         label: "Popular",
+        icon: "i-heroicons-arrow-trending-up",
         to: "/movies/popular",
     },
     {
         label: "Top Rated",
+        icon: "i-heroicons-star",
         to: "/movies/top-rated",
     },
     {
         label: "Upcoming",
+        icon: "i-heroicons-calendar-days",
         to: "/movies/upcoming",
     },
 ];
@@ -31,15 +35,11 @@ async function submitSearch() {
 </script>
 
 <template>
-    <nav class="absolute top-0 lef-0 w-full h-16 pl-60 pr-4 flex justify-between items-center z-30">
-        <ul class="flex gap-8 max-lg:hidden">
-            <li class="hover:text-primary" v-for="link in links">
-                <NuxtLink :to="link.to">{{ link.label }}</NuxtLink>
-            </li>
-        </ul>
+    <nav class="absolute top-0 lef-0 w-full h-16 pl-56 pr-4 flex justify-between items-center z-30">
+        <UHorizontalNavigation :links="links" class="max-md:hidden" />
 
         <UInput
-            class="ml-auto max-sm:hidden"
+            class="ml-auto w-64 max-lg:hidden"
             size="md"
             v-model="searchQuery"
             name="q"

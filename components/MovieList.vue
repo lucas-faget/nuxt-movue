@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { format } from "date-fns";
 import type { Movie } from "~/types/Movie";
-import { getPosterUrl } from "~/services/movies";
-import { PosterSize } from "~/types/PosterSize";
+const { $images } = useNuxtApp() as any;
 
-const props = defineProps<{
+defineProps<{
     movies: Movie[];
 }>();
 </script>
@@ -17,7 +16,7 @@ const props = defineProps<{
                     <div>
                         <img
                             class="w-full"
-                            :src="getPosterUrl(PosterSize.W154, movie.poster_path)"
+                            :src="$images.getPosterUrl(movie.poster_path)"
                             :alt="movie.title"
                             onerror="this.onerror = null; this.src='/poster-not-found.jpg'"
                         />

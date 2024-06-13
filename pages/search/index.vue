@@ -3,7 +3,7 @@ import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import type { Movie } from "~/types/Movie";
 import type { MovieList } from "~/types/MovieList";
-import { searchMovies } from "~/services/movies";
+const { $api } = useNuxtApp() as any;
 
 const isEmptyOrWhiteSpaces = (str: string): boolean => {
     return str.trim().length === 0;
@@ -21,7 +21,7 @@ const isPending = ref<boolean>(true);
 async function getMovies() {
     try {
         if (!isEmptyOrWhiteSpaces(searchQuery.value)) {
-            const data: MovieList = (await searchMovies(
+            const data: MovieList = (await $api.searchMovies(
                 searchQuery.value.trim(),
                 page
             )) as MovieList;

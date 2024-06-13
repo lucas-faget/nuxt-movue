@@ -3,8 +3,7 @@ import { ref } from "vue";
 import { useRoute } from "vue-router";
 import type { Movie } from "~/types/Movie";
 import type { MovieList } from "~/types/MovieList";
-import { BackdropSize } from "~/types/BackdropSize";
-import { fetchMovieDetails, fetchSimilarMovies, getBackdropUrl } from "~/services/movies";
+const { $api, $images } = useNuxtApp() as any;
 
 const route = useRoute();
 
@@ -16,7 +15,7 @@ const isSimilarMovieListEmpty = computed(() => similarMovies.value.length === 0)
 
 async function getMovieById() {
     try {
-        const data: any = (await fetchMovieDetails(id)) as any;
+        const data: any = (await $api.fetchMovieDetails(id)) as any;
         movie.value = data;
     } catch (error) {
         console.error("Failed to fetch movie: ", error);
@@ -25,7 +24,7 @@ async function getMovieById() {
 
 async function getSimilarMovies() {
     try {
-        const data: MovieList = (await fetchSimilarMovies(id)) as MovieList;
+        const data: MovieList = (await $api.fetchSimilarMovies(id)) as MovieList;
         similarMovies.value = data.results;
     } catch (error) {
         console.error("Failed to fetch movie: ", error);
@@ -40,10 +39,7 @@ getSimilarMovies();
     <section v-if="movie" class="w-full mt-16 flex flex-col">
         <div class="w-full relative" style="min-height: 75vh">
             <div class="image-container">
-                <img
-                    :src="getBackdropUrl(BackdropSize.W780, movie.backdrop_path)"
-                    :alt="movie.title"
-                />
+                <img :src="$images.getBackdropUrl(movie.backdrop_path)" :alt="movie.title" />
             </div>
 
             <div class="movie-details w-full max-w-[500px] min-h-[75vh] relative p-12 z-20">

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Movie } from "~/types/Movie";
 import type { MovieList } from "~/types/MovieList";
-import { fetchNowPlayingMovies } from "~/services/movies";
+const { $api } = useNuxtApp() as any;
 
 const page = ref<number>(1);
 const movies = ref<Movie[]>([]);
@@ -11,7 +11,7 @@ const isPending = ref<boolean>(true);
 
 async function getMovies() {
     try {
-        const data: MovieList = (await fetchNowPlayingMovies(page.value)) as MovieList;
+        const data: MovieList = (await $api.fetchNowPlayingMovies(page.value)) as MovieList;
         page.value = data.page;
         movies.value = data.results;
         totalPages.value = data.total_pages;
