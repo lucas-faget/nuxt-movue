@@ -9,10 +9,7 @@ const toggleHandler = () => {
 <template>
     <div class="flex flex-col min-h-screen font-text">
         <NuxtLayout>
-            <div class="min-h-screen flex relative">
-                <VerticalNavigation :isOpen="isNavigationOpen" @toggle="toggleHandler" />
-                <NuxtPage :class="isNavigationOpen ? 'ml-52' : 'ml-16'" />
-            </div>
+            <NuxtPage />
         </NuxtLayout>
     </div>
 </template>

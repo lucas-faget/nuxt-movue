@@ -31,7 +31,7 @@ watch(page, () => {
 </script>
 
 <template>
-    <section class="w-full mt-16 p-8 flex flex-col gap-8">
+    <div class="p-8 flex flex-col gap-8">
         <NuxtLayout name="movies" title="Upcoming Movies">
             <MovieCatalog
                 v-model="page"
@@ -41,5 +41,5 @@ watch(page, () => {
                 @change-page="getMovies"
             />
         </NuxtLayout>
-    </section>
+    </div>
 </template>

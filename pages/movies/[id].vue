@@ -36,7 +36,7 @@ getSimilarMovies();
 </script>
 
 <template>
-    <section v-if="movie" class="w-full mt-16 flex flex-col">
+    <div v-if="movie" class="flex flex-col">
         <div class="w-full relative" style="min-height: 75vh">
             <div class="image-container">
                 <img :src="$images.getBackdropUrl(movie.backdrop_path)" :alt="movie.title" />
@@ -52,7 +52,7 @@ getSimilarMovies();
             <MovieList :movies="similarMovies" />
             <UDivider size="sm" />
         </div>
-    </section>
+    </div>
 </template>
 
 <style scoped>

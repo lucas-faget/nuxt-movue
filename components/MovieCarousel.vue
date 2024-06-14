@@ -1,34 +1,20 @@
 <script setup lang="ts">
 import type { Movie } from "~/types/Movie";
-import type { MovieList } from "~/types/MovieList";
-const { $api, $images } = useNuxtApp() as any;
+const { $images } = useNuxtApp() as any;
 
-const movies = ref<Movie[]>([]);
-const isPending = ref<boolean>(true);
-
-async function getMovies() {
-    try {
-        const data: MovieList = (await $api.fetchPopularMovies()) as MovieList;
-        movies.value = data.results;
-        console.log(movies.value);
-    } catch (error) {
-        console.error("Failed to fetch movies: ", error);
-    } finally {
-        isPending.value = false;
-    }
-}
-
-getMovies();
+defineProps<{
+    movies: Movie[];
+}>();
 </script>
 
 <template>
-    <section class="w-full mt-16 p-8">
+    <div>
         <UCarousel v-slot="{ item: movie }" :items="movies" arrows>
-            <div class="relative mt-4">
+            <div class="relative mt-5">
                 <UBadge
                     v-if="movie.vote_average"
                     size="lg"
-                    color=""
+                    color="amber"
                     class="badge-center absolute bg-amber-200 font-bold"
                     :ui="{ rounded: 'rounded-full' }"
                 >
@@ -42,7 +28,7 @@ getMovies();
                 />
             </div>
         </UCarousel>
-    </section>
+    </div>
 </template>
 
 <style scoped>
