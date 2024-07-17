@@ -35,7 +35,9 @@ async function submitSearch() {
 </script>
 
 <template>
-    <nav class="absolute top-0 lef-0 w-full h-16 pl-56 pr-4 flex justify-between items-center z-30">
+    <nav
+        class="absolute top-0 lef-0 w-full h-16 pl-56 pr-4 flex justify-between items-center z-30 bg-neutral-900"
+    >
         <UHorizontalNavigation :links="links" class="max-md:hidden" />
 
         <UInput

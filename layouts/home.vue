@@ -50,6 +50,8 @@ const links = [
                 </div>
             </section>
         </div>
-        <AppFooter />
+        <div :class="isNavigationOpen ? 'ml-52' : 'ml-16'">
+            <AppFooter />
+        </div>
     </div>
 </template>

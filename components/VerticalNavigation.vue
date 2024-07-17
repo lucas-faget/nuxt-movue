@@ -60,7 +60,10 @@ const links = computed(() => [
 
 <template>
     <aside
-        :class="['aside', isOpen ? 'w-52' : 'w-16']"
+        :class="[
+            'transition-width duration-300 ease-in-out overflow-hidden',
+            isOpen ? 'w-52' : 'w-16',
+        ]"
         class="bg-slate-900 shrink-0 fixed top-0 left-0 z-40 h-full"
     >
         <div class="flex flex-col">
@@ -80,10 +83,3 @@ const links = computed(() => [
         </div>
     </aside>
 </template>
-
-<style scoped>
-.aside {
-    transition: width 0.3s ease;
-    overflow: hidden;
-}
-</style>

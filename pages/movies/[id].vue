@@ -38,8 +38,12 @@ getSimilarMovies();
 <template>
     <div v-if="movie" class="flex flex-col">
         <div class="w-full relative" style="min-height: 75vh">
-            <div class="image-container">
-                <img :src="$images.getBackdropUrl(movie.backdrop_path)" :alt="movie.title" />
+            <div class="image-container absolute top-0 right-0 h-[75vh] z-10 overflow-hidden">
+                <img
+                    class="h-full object-cover"
+                    :src="$images.getBackdropUrl(movie.backdrop_path)"
+                    :alt="movie.title"
+                />
             </div>
 
             <div class="movie-details w-full max-w-[500px] min-h-[75vh] relative p-12 z-20">
@@ -59,23 +63,10 @@ getSimilarMovies();
 .movie-details {
     background: linear-gradient(
         to right,
-        rgba(18, 18, 18, 1) 0%,
-        rgba(18, 18, 18, 0.8) 20%,
-        rgba(18, 18, 18, 0.7) 80%,
-        rgba(18, 18, 18, 0.6) 85%,
-        rgba(18, 18, 18, 0.45) 90%,
-        rgba(18, 18, 18, 0.25) 95%,
-        rgba(18, 18, 18, 0) 100%
+        var(--background-color) 0%,
+        var(--background-color-semi-transparent) 80%,
+        var(--background-color-transparent) 100%
     );
-}
-
-.image-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 75vh;
-    z-index: 10;
-    overflow: hidden;
 }
 
 .image-container::before {
@@ -99,11 +90,5 @@ getSimilarMovies();
             var(--background-color-transparent) 70%,
             var(--background-color) 100%
         );
-}
-
-.image-container img {
-    height: 100%;
-    width: auto;
-    object-fit: cover;
 }
 </style>

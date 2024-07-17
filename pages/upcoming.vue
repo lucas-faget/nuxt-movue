@@ -25,5 +25,7 @@ getMovies();
 </script>
 
 <template>
-    <MovieCarousel :movies="movies" />
+    <div v-if="!isPending && movies.length > 0">
+        <MovieCarousel :movies="movies" />
+    </div>
 </template>

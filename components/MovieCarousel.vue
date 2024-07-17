@@ -12,8 +12,8 @@ defineProps<{
     <div>
         <UCarousel v-slot="{ item: movie }" :items="movies" arrows>
             <NuxtLink :to="`/movies/${movie.id}`">
-                <div class="movie relative mt-5">
-                    <div class="badge absolute z-10">
+                <div class="relative mt-5 group">
+                    <div class="absolute top-0 left-1/2 -translate-y-1/2 -translate-x-1/2 z-10">
                         <UBadge
                             v-if="movie.vote_average"
                             size="lg"
@@ -26,7 +26,7 @@ defineProps<{
                     </div>
                     <div class="relative overflow-hidden">
                         <div
-                            class="movie-details absolute bottom-0 w-full p-2 flex flex-col gap-1 bg-slate-800"
+                            class="movie-details absolute bottom-0 w-full p-2 flex flex-col gap-1 bg-slate-800 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"
                         >
                             <div class="text-lg font-title">{{ movie.title }}</div>
                             <div class="font-title text-gray-400">
@@ -45,20 +45,3 @@ defineProps<{
         </UCarousel>
     </div>
 </template>
-
-<style scoped>
-.badge {
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.movie-details {
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.movie:hover .movie-details {
-    transform: translateY(0%);
-}
-</style>
