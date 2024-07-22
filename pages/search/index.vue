@@ -57,7 +57,7 @@ watch(page, () => {
     <section class="w-full mt-16 p-8 flex flex-col gap-8">
         <NuxtLayout name="movies" title="Movie Search">
             <UInput
-                size="md"
+                size="xl"
                 v-model="searchQuery"
                 name="q"
                 placeholder="Search..."

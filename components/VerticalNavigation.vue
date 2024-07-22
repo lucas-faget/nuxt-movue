@@ -64,7 +64,7 @@ const links = computed(() => [
             'transition-width duration-300 ease-in-out overflow-hidden',
             isOpen ? 'w-52' : 'w-16',
         ]"
-        class="bg-slate-900 shrink-0 fixed top-0 left-0 z-40 h-full"
+        class="bg-black shrink-0 fixed top-0 left-0 z-40 h-full"
     >
         <div class="flex flex-col">
             <div

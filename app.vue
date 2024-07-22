@@ -7,7 +7,7 @@ const toggleHandler = () => {
 </script>
 
 <template>
-    <div class="flex flex-col min-h-screen font-text bg-neutral-900">
+    <div class="flex flex-col min-h-screen font-text bg-neutral-900 text-neutral-100">
         <NuxtLayout>
             <NuxtPage />
         </NuxtLayout>
