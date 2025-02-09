@@ -69,12 +69,12 @@ const links = computed(() => [
         <div class="flex flex-col">
             <div
                 :class="isOpen ? 'pl-4' : 'justify-center'"
-                class="h-16 flex items-center hover:bg-primary cursor-pointer"
+                class="h-16 flex items-center group cursor-pointer"
                 @click="$emit('toggle')"
             >
                 <UIcon
                     :name="isOpen ? 'i-heroicons-x-mark' : 'i-heroicons-bars-3'"
-                    class="h-8 w-8"
+                    class="h-8 w-8 group-hover:scale-110 transform transition duration-300"
                 />
             </div>
             <div class="mt-8 flex justify-center">

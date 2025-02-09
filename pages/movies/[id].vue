@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { useRoute } from "vue-router";
 import type { Movie } from "~/types/Movie";
 import type { MovieList } from "~/types/MovieList";
@@ -37,17 +36,17 @@ getSimilarMovies();
 
 <template>
     <div v-if="movie" class="flex flex-col">
-        <div class="w-full relative" style="min-height: 75vh">
-            <div class="image-container absolute top-0 right-0 h-[75vh] z-10 overflow-hidden">
+        <div class="relative w-full min-h-[75vh] flex justify-between">
+            <div class="relative w-full max-w-[500px] min-h-full p-12 z-30 shrink-0 -mr-[100px]">
+                <MovieDetails :movie="movie" />
+            </div>
+
+            <div class="image relative h-[75vh] min-h-[400px] w-auto z-10">
                 <img
-                    class="h-full object-cover"
+                    class="w-full h-full object-cover"
                     :src="$images.getBackdropUrl(movie.backdrop_path)"
                     :alt="movie.title"
                 />
-            </div>
-
-            <div class="movie-details w-full max-w-[500px] min-h-[75vh] relative p-12 z-20">
-                <MovieDetails :movie="movie" />
             </div>
         </div>
 
@@ -60,34 +59,23 @@ getSimilarMovies();
 </template>
 
 <style scoped>
-.movie-details {
-    background: linear-gradient(
-        to right,
-        var(--background-color) 0%,
-        var(--background-color-semi-transparent) 80%,
-        var(--background-color-transparent) 100%
-    );
-}
-
-.image-container::before {
-    content: "";
+.image::before {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    z-index: 20;
     background: linear-gradient(
             0deg,
             var(--background-color) 0%,
-            var(--background-color-transparent) 30%,
-            var(--background-color-transparent) 70%,
+            var(--background-color-transparent) 200px,
+            var(--background-color-transparent) calc(100% - 200px),
             var(--background-color) 100%
         ),
         linear-gradient(
             90deg,
             var(--background-color) 0%,
-            var(--background-color-transparent) 30%,
-            var(--background-color-transparent) 70%,
+            var(--background-color-transparent) 400px,
+            var(--background-color-transparent) calc(100% - 200px),
             var(--background-color) 100%
         );
 }
