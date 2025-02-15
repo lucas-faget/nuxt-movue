@@ -41,7 +41,7 @@ getSimilarMovies();
                 <MovieDetails :movie="movie" />
             </div>
 
-            <div class="image relative h-[75vh] min-h-[400px] w-auto z-10">
+            <div class="image max-sm:hidden relative h-[75vh] min-h-[400px] w-auto z-10">
                 <img
                     class="w-full h-full object-cover"
                     :src="$images.getBackdropUrl(movie.backdrop_path)"
